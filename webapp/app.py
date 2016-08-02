@@ -8,7 +8,7 @@ app = Flask(__name__)
 def hello():
     #provider = str(os.environ.get('PROVIDER', 'world'))
     #return 'Hello '+provider+'!'
-    return 'Hello PaaS World'
+    return 'Hello PaaS World!'
 
 
 if __name__ == '__main__':
