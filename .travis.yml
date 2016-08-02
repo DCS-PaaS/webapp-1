@@ -13,12 +13,14 @@ install:
 - pip install -r webapp/requirements.txt
 
 before_script:
-- docker run -d -P dcspaas/webapp:python python app.py
+- WORKING_DIR=$(pwd)
+- docker create -v $WORKING_DIR/webapp:/opt/webapp -P dcspaas/webapp:python python.app
+- CONTAINER_ID=$(docker ps -lq) 
+- docker start $CONTAINER_ID
 
 script:
 - python webapp/tests.py
 
 after_success:
-- CONTAINER_ID=$(docker ps -lq)
 - docker commit $CONTAINER_ID dcspaas/webapp:python
 - docker push dcspaas/webapp:python
