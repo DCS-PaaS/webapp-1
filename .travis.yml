@@ -1,0 +1,17 @@
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+before_install:
+- docker login -e DCS_PaaS@dell.com -u dcspaas -p PaaSword@123
+- docker pull training/webapp
+- docker run -d -P training/webapp python app.py
+- CONTAINER_ID=$(docker ps -lq)
+- docker commit $CONTAINER_ID dcspaas/webapp:python
+- docker push dcspaas/webapp:python
+
+script:
+- bundle exec rake test
