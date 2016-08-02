@@ -12,3 +12,10 @@ before_install:
 - CONTAINER_ID=$(docker ps -lq)
 - docker commit $CONTAINER_ID dcspaas/webapp:python
 - docker push dcspaas/webapp:python
+
+install:
+-pip install -r  requirements.txt
+
+
+script:
+- python tests.py
