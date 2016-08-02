@@ -14,7 +14,7 @@ install:
 
 before_script:
 - WORKING_DIR=$(pwd)
-- docker create -v $WORKING_DIR/webapp:/opt/webapp -P dcspaas/webapp:python python.app
+- docker create -v $WORKING_DIR/webapp:/opt/webapp -P dcspaas/webapp:python python app.py
 - CONTAINER_ID=$(docker ps -lq) 
 - docker start $CONTAINER_ID
 
