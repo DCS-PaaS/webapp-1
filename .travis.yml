@@ -8,7 +8,7 @@ services:
 before_install:
 - docker login -e DCS_PaaS@dell.com -u dcspaas -p PaaSword@123
 - docker pull dcspaas/webapp:python
-- docker run -d -P dcspaat/webapp:python python app.py
+- docker run -d -P dcspaas/webapp:python python app.py
 - CONTAINER_ID=$(docker ps -lq)
 - docker commit $CONTAINER_ID dcspaas/webapp:python
 - docker push dcspaas/webapp:python
