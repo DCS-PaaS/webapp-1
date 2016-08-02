@@ -13,10 +13,10 @@ install:
 - pip install -r webapp/requirements.txt
 
 before_script:
-- docker run -d -P dcspaas/webapp:python python app.py
+- docker run -d -P dcspaas/webapp:python -c "python app.py
 
 script:
-- python tests.py
+- python webapp/tests.py
 
 after_success:
 - CONTAINER_ID=$(docker ps -lq)
