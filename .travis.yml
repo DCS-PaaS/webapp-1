@@ -26,6 +26,7 @@ before_script:
 ##run unit test (need to run this externally and internally)
 script:
 - python webapp/tests.py
+- docker exec $CONTAINER_ID python tests.py
 
 ##commit and push successful container update to Docker Hub (updates not being pushed)
 after_success:
