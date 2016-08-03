@@ -7,7 +7,7 @@ services:
 
 # authenticate docker hub and pull image from repo
 before_install:
-- docker login -e DCS_PaaS@dell.com -u dcspaas -p PaaSword@123
+- docker login -e DCS_PaaS@dell.com -u dcspaas -p Docker@123
 - docker pull dcspaas/webapp:python
 
 # setup python requirements and dependencies
