@@ -23,7 +23,7 @@ before_script:
 - CONTAINER_ID=$(docker ps -lq) 
 - docker start $CONTAINER_ID
 
-##run unit test (need to run this ecternally and internally)
+##run unit test (need to run this externally and internally)
 script:
 - python webapp/tests.py
 
