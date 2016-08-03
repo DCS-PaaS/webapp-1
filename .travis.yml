@@ -4,31 +4,30 @@ language: python
 
 services:
   - docker
-##authenticate docker hun and pull image from repo
+
+# authenticate docker hub and pull image from repo
 before_install:
 - docker login -e DCS_PaaS@dell.com -u dcspaas -p PaaSword@123
 - docker pull dcspaas/webapp:python
 
-##use pip to install webapp requirements
+# setup python requirements and dependencies
 install:
 - pip install -r webapp/requirements.txt
 
-##set current working directory variable
-##copy contents of current working directory to image directory containing app
-##set CONTAINER_ID = the container id of the container with the new files
-## start the container
+
+# create container, update code from repo, and start it
 before_script:
 - WORKING_DIR=$(pwd)
-- docker create -v $WORKING_DIR/webapp:/opt/webapp -P dcspaas/webapp:python python app.py
-- CONTAINER_ID=$(docker ps -lq) 
+- docker create -P dcspaas/webapp:python python app.py
+- CONTAINER_ID=$(docker ps -lq)
+- docker cp webapp $CONTAINER_ID:/opt/
 - docker start $CONTAINER_ID
 
-##run unit test (need to run this externally and internally)
+# run unit tests (need to run this externally and internally)
 script:
 - python webapp/tests.py
 - docker exec $CONTAINER_ID python tests.py
 
-##commit and push successful container update to Docker Hub (updates not being pushed)
 after_success:
 - docker commit $CONTAINER_ID dcspaas/webapp:python
 - docker push dcspaas/webapp:python
