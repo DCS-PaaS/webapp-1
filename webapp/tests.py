@@ -8,8 +8,8 @@ class AppTestCase(unittest.TestCase):
    def test_root_text(self):
         tester = app.test_client(self)
         response = tester.get('/')
-        #assert 'Hello PaaS World!' in response.data
-        assert 'Hello World!' in response.data
+        assert 'Hello PaaS World!' in response.data
+        # assert 'Hello World!' in response.data
 
 if __name__ == '__main__':
     unittest.main()
